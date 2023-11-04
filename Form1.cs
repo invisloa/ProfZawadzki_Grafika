@@ -49,7 +49,9 @@ namespace ProfZawadzki
 						break;
 					// Add other cases as needed
 					case Tools.Circle:
-						MyGraphics.DrawCircle(x0,y0, _R, bitmap, pictureBox1, Color.Blue);
+						int R = (int)(Math.Sqrt(Math.Pow(x1 - x0, 2) + Math.Pow(y1 - y0, 2)));
+
+						MyGraphics.DrawCircle(x0,y0, R, bitmap, pictureBox1, Color.Blue);
 						break;
 
 					default:
@@ -67,12 +69,17 @@ namespace ProfZawadzki
 			tool = Tools.Circle;
 		}
 
+		private void btnClear_Click(object sender, EventArgs e)
+		{
+			bitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+			pictureBox1.Image = bitmap;
+		}
+
 		public Form1()
 		{
 
 			InitializeComponent();
 			bitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-
 		}
 
 		private void button1_Click(object sender, EventArgs e)

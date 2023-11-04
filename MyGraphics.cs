@@ -86,16 +86,23 @@ namespace ProfZawadzki
 			int x = -radius;
 			int y = 0;
 			int err = 2 - 2 * radius;
-			do
+			try
 			{
-				bitmap.SetPixel(xc - x, yc + y, color);
-				bitmap.SetPixel(xc - y, yc - x, color);
-				bitmap.SetPixel(xc + x, yc - y, color);
-				bitmap.SetPixel(xc + y, yc + x, color);
-				int r = err;
-				if (r <= y) err += ++y * 2 + 1;
-				if (r > x || err > y) err += ++x * 2 + 1;
-			} while (x < 0);
+				do
+				{
+
+					bitmap.SetPixel(xc - x, yc + y, color);
+					bitmap.SetPixel(xc - y, yc - x, color);
+					bitmap.SetPixel(xc + x, yc - y, color);
+					bitmap.SetPixel(xc + y, yc + x, color);
+					int r = err;
+					if (r <= y) err += ++y * 2 + 1;
+					if (r > x || err > y) err += ++x * 2 + 1;
+
+				} while (x < 0);
+			}
+			catch { }
+
 			pictureBox.Image = bitmap;
 		}
 

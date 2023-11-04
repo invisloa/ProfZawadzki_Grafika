@@ -32,6 +32,7 @@
 			this.button1 = new System.Windows.Forms.Button();
 			this.btnNone = new System.Windows.Forms.Button();
 			this.btnCircle = new System.Windows.Forms.Button();
+			this.btnClear = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -75,11 +76,22 @@
 			this.btnCircle.UseVisualStyleBackColor = true;
 			this.btnCircle.Click += new System.EventHandler(this.btnCircle_Click);
 			// 
+			// btnClear
+			// 
+			this.btnClear.Location = new System.Drawing.Point(713, 27);
+			this.btnClear.Name = "btnClear";
+			this.btnClear.Size = new System.Drawing.Size(75, 23);
+			this.btnClear.TabIndex = 4;
+			this.btnClear.Text = "Clear";
+			this.btnClear.UseVisualStyleBackColor = true;
+			this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
+			this.Controls.Add(this.btnClear);
 			this.Controls.Add(this.btnCircle);
 			this.Controls.Add(this.btnNone);
 			this.Controls.Add(this.button1);
@@ -97,6 +109,7 @@
 		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.Button btnNone;
 		private System.Windows.Forms.Button btnCircle;
+		private System.Windows.Forms.Button btnClear;
 	}
 }
 
