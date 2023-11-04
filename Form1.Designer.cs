@@ -33,6 +33,7 @@
 			this.btnNone = new System.Windows.Forms.Button();
 			this.btnCircle = new System.Windows.Forms.Button();
 			this.btnClear = new System.Windows.Forms.Button();
+			this.btnEllipse = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -44,6 +45,7 @@
 			this.pictureBox1.TabIndex = 0;
 			this.pictureBox1.TabStop = false;
 			this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
+			this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
 			this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
 			// 
 			// button1
@@ -86,11 +88,22 @@
 			this.btnClear.UseVisualStyleBackColor = true;
 			this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
 			// 
+			// btnEllipse
+			// 
+			this.btnEllipse.Location = new System.Drawing.Point(269, 26);
+			this.btnEllipse.Name = "btnEllipse";
+			this.btnEllipse.Size = new System.Drawing.Size(75, 23);
+			this.btnEllipse.TabIndex = 5;
+			this.btnEllipse.Text = "Ellipse";
+			this.btnEllipse.UseVisualStyleBackColor = true;
+			this.btnEllipse.Click += new System.EventHandler(this.btnEllipse_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
+			this.Controls.Add(this.btnEllipse);
 			this.Controls.Add(this.btnClear);
 			this.Controls.Add(this.btnCircle);
 			this.Controls.Add(this.btnNone);
@@ -110,6 +123,7 @@
 		private System.Windows.Forms.Button btnNone;
 		private System.Windows.Forms.Button btnCircle;
 		private System.Windows.Forms.Button btnClear;
+		private System.Windows.Forms.Button btnEllipse;
 	}
 }
 

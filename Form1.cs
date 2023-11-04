@@ -15,12 +15,15 @@ namespace ProfZawadzki
 	{
 		Bitmap bitmap;
 		int x0, y0, x1, y1;
+		private Bitmap tempBitmap;
 		bool mouseDown = false;
 		enum Tools
 		{
 			None,
 			Line,
-			Circle
+			Circle,
+			Ellipse,
+			Spiral
 		}
 		Tools tool = Tools.None;
 		private readonly int _R = 10;
@@ -32,34 +35,36 @@ namespace ProfZawadzki
 				mouseDown = true;
 				x0 = e.X;
 				y0 = e.Y;
+				tempBitmap = (Bitmap)bitmap.Clone(); // Create a copy of the bitmap for the preview
 			}
 		}
 
+
 		private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
 		{
-			x1 = e.X;
-			y1 = e.Y;
-			if (tool != Tools.None && mouseDown == true)
+			if (mouseDown)
 			{
+				x1 = e.X;
+				y1 = e.Y;
 
 				switch (tool)
 				{
 					case Tools.Line:
 						MyGraphics.DrawLine(x0, y0, x1, y1, bitmap, pictureBox1, Color.Red);
 						break;
-					// Add other cases as needed
 					case Tools.Circle:
-						int R = (int)(Math.Sqrt(Math.Pow(x1 - x0, 2) + Math.Pow(y1 - y0, 2)));
-
-						MyGraphics.DrawCircle(x0,y0, R, bitmap, pictureBox1, Color.Blue);
+						int R = (int)Math.Sqrt(Math.Pow(x1 - x0, 2) + Math.Pow(y1 - y0, 2));
+						MyGraphics.DrawCircle(x0, y0, R, bitmap, pictureBox1, Color.Blue);
 						break;
-
+						case Tools.Ellipse:
+						MyGraphics.DrawEllipse(x0, y0, Math.Abs(x1 - x0), Math.Abs(y1 - y0), bitmap, pictureBox1, Color.Green);
+						break;
 					default:
 						break;
-
 				}
-				pictureBox1.Refresh();
 
+				pictureBox1.Image = bitmap; // Update the picture box with the original bitmap.
+				pictureBox1.Refresh(); // Refresh the PictureBox control.
 				mouseDown = false;
 			}
 		}
@@ -74,6 +79,42 @@ namespace ProfZawadzki
 			bitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
 			pictureBox1.Image = bitmap;
 		}
+
+		private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+		{
+			if (mouseDown)
+			{
+				tempBitmap = (Bitmap)bitmap.Clone();
+				int xCurrent = e.X;
+				int yCurrent = e.Y;
+
+				switch (tool)
+				{
+					case Tools.Line:
+						MyGraphics.DrawLine(x0, y0, xCurrent, yCurrent, tempBitmap, pictureBox1, Color.Red);
+						break;
+					case Tools.Circle:
+						int R = (int)Math.Sqrt(Math.Pow(xCurrent - x0, 2) + Math.Pow(yCurrent - y0, 2));
+						MyGraphics.DrawCircle(x0, y0, R, tempBitmap, pictureBox1, Color.Blue);
+						break;
+					case Tools.Ellipse:
+						MyGraphics.DrawEllipse(x0, y0, Math.Abs(xCurrent - x0), Math.Abs(yCurrent - y0), tempBitmap, pictureBox1, Color.Green);
+						break;
+					case Tools.Spiral:
+						// Spiral drawing code
+						break;
+					default:
+						break;
+				}
+				pictureBox1.Image = tempBitmap;
+			}
+		}
+
+		private void btnEllipse_Click(object sender, EventArgs e)
+		{
+			tool = Tools.Ellipse;
+		}
+
 
 		public Form1()
 		{

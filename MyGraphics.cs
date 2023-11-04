@@ -85,29 +85,42 @@ namespace ProfZawadzki
 		{
 			int x = -radius;
 			int y = 0;
-			int err = 2 - 2 * radius;
-			try
+			int err = 2 - 2 * radius;       // err is a part of Bresenham's circle algorithm
+
+			do
 			{
-				do
-				{
+				// Set the pixels, checking the boundaries of the bitmap
+				DrawPixelIfPossible(xc - x, yc + y, bitmap, color);
+				DrawPixelIfPossible(xc - y, yc - x, bitmap, color);
+				DrawPixelIfPossible(xc + x, yc - y, bitmap, color);
+				DrawPixelIfPossible(xc + y, yc + x, bitmap, color);
 
-					bitmap.SetPixel(xc - x, yc + y, color);
-					bitmap.SetPixel(xc - y, yc - x, color);
-					bitmap.SetPixel(xc + x, yc - y, color);
-					bitmap.SetPixel(xc + y, yc + x, color);
-					int r = err;
-					if (r <= y) err += ++y * 2 + 1;
-					if (r > x || err > y) err += ++x * 2 + 1;
+				int r = err;
+				if (r <= y) err += ++y * 2 + 1;
+				if (r > x || err > y) err += ++x * 2 + 1;
 
-				} while (x < 0);
-			}
-			catch { }
+			} while (x < 0);
 
 			pictureBox.Image = bitmap;
 		}
 
-/*		public static void DrawEllipse(int xc, int yc, int width, int height, Bitmap bitmap, PictureBox pictureBox, Color color)
+		// Helper method to set a pixel if it's within the bitmap's boundaries
+		private static void DrawPixelIfPossible(int x, int y, Bitmap bitmap, Color color)
 		{
+			if (x >= 0 && x < bitmap.Width && y >= 0 && y < bitmap.Height)
+			{
+				bitmap.SetPixel(x, y, color);
+			}
+		}
+
+		public static void DrawEllipse(int xc, int yc, int width, int height, Bitmap bitmap, PictureBox pictureBox, Color color)
+		{
+			if (width <= 0 || height <= 0)
+			{
+				// Optionally handle the error: throw an exception, return, log a message, etc.
+				return;
+			}
+
 			int a2 = width * width;
 			int b2 = height * height;
 			int fa2 = 4 * a2, fb2 = 4 * b2;
@@ -115,10 +128,10 @@ namespace ProfZawadzki
 
 			for (x = 0, y = height, sigma = 2 * b2 + a2 * (1 - 2 * height); b2 * x <= a2 * y; x++)
 			{
-				SetPixel(xc + x, yc + y, bitmap, color);
-				SetPixel(xc - x, yc + y, bitmap, color);
-				SetPixel(xc + x, yc - y, bitmap, color);
-				SetPixel(xc - x, yc - y, bitmap, color);
+				DrawPixelIfPossible(xc + x, yc + y, bitmap, color);
+				DrawPixelIfPossible(xc - x, yc + y, bitmap, color);
+				DrawPixelIfPossible(xc + x, yc - y, bitmap, color);
+				DrawPixelIfPossible(xc - x, yc - y, bitmap, color);
 				if (sigma >= 0)
 				{
 					sigma += fa2 * (1 - y);
@@ -129,10 +142,10 @@ namespace ProfZawadzki
 
 			for (x = width, y = 0, sigma = 2 * a2 + b2 * (1 - 2 * width); a2 * y <= b2 * x; y++)
 			{
-				SetPixel(xc + x, yc + y, bitmap, color);
-				SetPixel(xc - x, yc + y, bitmap, color);
-				SetPixel(xc + x, yc - y, bitmap, color);
-				SetPixel(xc - x, yc - y, bitmap, color);
+				DrawPixelIfPossible(xc + x, yc + y, bitmap, color);
+				DrawPixelIfPossible(xc - x, yc + y, bitmap, color);
+				DrawPixelIfPossible(xc + x, yc - y, bitmap, color);
+				DrawPixelIfPossible(xc - x, yc - y, bitmap, color);
 				if (sigma >= 0)
 				{
 					sigma += fb2 * (1 - x);
@@ -154,7 +167,7 @@ namespace ProfZawadzki
 				int x = xc + (int)(radius * Math.Cos(theta));
 				int y = yc + (int)(radius * Math.Sin(theta));
 
-				SetPixel(x, y, bitmap, color);
+				DrawPixelIfPossible(x, y, bitmap, color);
 
 				radius += 1;
 				theta += dTheta;
@@ -162,6 +175,6 @@ namespace ProfZawadzki
 
 			pictureBox.Image = bitmap;
 		}
-*/
+
 	}
 }
