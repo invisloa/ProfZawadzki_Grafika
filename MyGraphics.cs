@@ -45,6 +45,12 @@ namespace ProfZawadzki
 				pictureBox.Image = bitmap;
 				return;
 			}
+
+			int dl;
+
+
+
+
 			// slope line
 			float xi =x0, yi =y0;
 			//m wspolczynnik kierunkowy
@@ -52,90 +58,103 @@ namespace ProfZawadzki
 			float dx, dy;
 			if(Math.Abs(x1-x0) >= Math.Abs(y1-y0))
 			{
-
+				dx = x0<x1 ? 1 : -1;
+				dy = m * dx;
+				dl = Math.Abs(x1 - x0);
 			}
 			else
 			{
+				dy = y0<y1 ? 1 : -1;
+				dx = dy/m;
+				dl = Math.Abs(y1- y0);
+			}
+			for (int i = 0; i < dl; i++)
+			{
+				if (xi > 1 && xi < width && yi > 1 && yi < height)
+				{
+					bitmap.SetPixel((int)xi, (int)yi, color);
+				}
 
+				xi += dx;yi += dy;
 			}
 		}
 
 
 
-		/*		public static void DrawCircle(int xc, int yc, int radius, Bitmap bitmap, PictureBox pictureBox, Color color)
+		public static void DrawCircle(int xc, int yc, int radius, Bitmap bitmap, PictureBox pictureBox, Color color)
+		{
+			int x = -radius;
+			int y = 0;
+			int err = 2 - 2 * radius;
+			do
+			{
+				bitmap.SetPixel(xc - x, yc + y, color);
+				bitmap.SetPixel(xc - y, yc - x, color);
+				bitmap.SetPixel(xc + x, yc - y, color);
+				bitmap.SetPixel(xc + y, yc + x, color);
+				int r = err;
+				if (r <= y) err += ++y * 2 + 1;
+				if (r > x || err > y) err += ++x * 2 + 1;
+			} while (x < 0);
+			pictureBox.Image = bitmap;
+		}
+
+/*		public static void DrawEllipse(int xc, int yc, int width, int height, Bitmap bitmap, PictureBox pictureBox, Color color)
+		{
+			int a2 = width * width;
+			int b2 = height * height;
+			int fa2 = 4 * a2, fb2 = 4 * b2;
+			int x, y, sigma;
+
+			for (x = 0, y = height, sigma = 2 * b2 + a2 * (1 - 2 * height); b2 * x <= a2 * y; x++)
+			{
+				SetPixel(xc + x, yc + y, bitmap, color);
+				SetPixel(xc - x, yc + y, bitmap, color);
+				SetPixel(xc + x, yc - y, bitmap, color);
+				SetPixel(xc - x, yc - y, bitmap, color);
+				if (sigma >= 0)
 				{
-					int x = -radius;
-					int y = 0;
-					int err = 2 - 2 * radius;
-					do
-					{
-						SetPixel(xc - x, yc + y, bitmap, color);
-						SetPixel(xc - y, yc - x, bitmap, color);
-						SetPixel(xc + x, yc - y, bitmap, color);
-						SetPixel(xc + y, yc + x, bitmap, color);
-						int r = err;
-						if (r <= y) err += ++y * 2 + 1;
-						if (r > x || err > y) err += ++x * 2 + 1;
-					} while (x < 0);
-					pictureBox.Image = bitmap;
+					sigma += fa2 * (1 - y);
+					y--;
 				}
+				sigma += b2 * ((4 * x) + 6);
+			}
 
-				public static void DrawEllipse(int xc, int yc, int width, int height, Bitmap bitmap, PictureBox pictureBox, Color color)
+			for (x = width, y = 0, sigma = 2 * a2 + b2 * (1 - 2 * width); a2 * y <= b2 * x; y++)
+			{
+				SetPixel(xc + x, yc + y, bitmap, color);
+				SetPixel(xc - x, yc + y, bitmap, color);
+				SetPixel(xc + x, yc - y, bitmap, color);
+				SetPixel(xc - x, yc - y, bitmap, color);
+				if (sigma >= 0)
 				{
-					int a2 = width * width;
-					int b2 = height * height;
-					int fa2 = 4 * a2, fb2 = 4 * b2;
-					int x, y, sigma;
-
-					for (x = 0, y = height, sigma = 2 * b2 + a2 * (1 - 2 * height); b2 * x <= a2 * y; x++)
-					{
-						SetPixel(xc + x, yc + y, bitmap, color);
-						SetPixel(xc - x, yc + y, bitmap, color);
-						SetPixel(xc + x, yc - y, bitmap, color);
-						SetPixel(xc - x, yc - y, bitmap, color);
-						if (sigma >= 0)
-						{
-							sigma += fa2 * (1 - y);
-							y--;
-						}
-						sigma += b2 * ((4 * x) + 6);
-					}
-
-					for (x = width, y = 0, sigma = 2 * a2 + b2 * (1 - 2 * width); a2 * y <= b2 * x; y++)
-					{
-						SetPixel(xc + x, yc + y, bitmap, color);
-						SetPixel(xc - x, yc + y, bitmap, color);
-						SetPixel(xc + x, yc - y, bitmap, color);
-						SetPixel(xc - x, yc - y, bitmap, color);
-						if (sigma >= 0)
-						{
-							sigma += fb2 * (1 - x);
-							x--;
-						}
-						sigma += a2 * ((4 * y) + 6);
-					}
-					pictureBox.Image = bitmap;
+					sigma += fb2 * (1 - x);
+					x--;
 				}
+				sigma += a2 * ((4 * y) + 6);
+			}
+			pictureBox.Image = bitmap;
+		}
 
-				public static void DrawSpiral(int xc, int yc, int turns, int stepSize, Bitmap bitmap, PictureBox pictureBox, Color color)
-				{
-					double theta = 0;
-					double dTheta = 2 * Math.PI / (stepSize * turns);
-					int radius = 0;
+		public static void DrawSpiral(int xc, int yc, int turns, int stepSize, Bitmap bitmap, PictureBox pictureBox, Color color)
+		{
+			double theta = 0;
+			double dTheta = 2 * Math.PI / (stepSize * turns);
+			int radius = 0;
 
-					for (int i = 0; i < stepSize * turns; i++)
-					{
-						int x = xc + (int)(radius * Math.Cos(theta));
-						int y = yc + (int)(radius * Math.Sin(theta));
+			for (int i = 0; i < stepSize * turns; i++)
+			{
+				int x = xc + (int)(radius * Math.Cos(theta));
+				int y = yc + (int)(radius * Math.Sin(theta));
 
-						SetPixel(x, y, bitmap, color);
+				SetPixel(x, y, bitmap, color);
 
-						radius += 1;
-						theta += dTheta;
-					}
+				radius += 1;
+				theta += dTheta;
+			}
 
-					pictureBox.Image = bitmap;
-				}
-		*/
+			pictureBox.Image = bitmap;
+		}
+*/
 	}
 }
