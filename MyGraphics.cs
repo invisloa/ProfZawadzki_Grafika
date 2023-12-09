@@ -159,17 +159,17 @@ namespace ProfZawadzki
 		public static void DrawSpiral(int xc, int yc, int turns, int stepSize, Bitmap bitmap, PictureBox pictureBox, Color color)
 		{
 			double theta = 0;
-			double dTheta = 2 * Math.PI / (stepSize * turns);
-			int radius = 0;
+			double dTheta = 2 * Math.PI / stepSize;  // Controls the spacing between points along the spiral
+			double maxRadius = Math.Min(pictureBox.Width, pictureBox.Height) / 2;  // Maximum radius to fill the PictureBox
+			double radiusIncrement = maxRadius / (stepSize * turns);  // Increment radius more slowly for tighter spiral
 
 			for (int i = 0; i < stepSize * turns; i++)
 			{
-				int x = xc + (int)(radius * Math.Cos(theta));
-				int y = yc + (int)(radius * Math.Sin(theta));
+				int x = xc + (int)(i * radiusIncrement * Math.Cos(theta));
+				int y = yc + (int)(i * radiusIncrement * Math.Sin(theta));
 
 				DrawPixelIfPossible(x, y, bitmap, color);
 
-				radius += 1;
 				theta += dTheta;
 			}
 

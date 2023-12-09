@@ -17,6 +17,7 @@ namespace ProfZawadzki
 		int x0, y0, x1, y1;
 		private Bitmap tempBitmap;
 		bool mouseDown = false;
+		private Color _mySelectedColor = Color.Black;
 		enum Tools
 		{
 			None,
@@ -50,14 +51,17 @@ namespace ProfZawadzki
 				switch (tool)
 				{
 					case Tools.Line:
-						MyGraphics.DrawLine(x0, y0, x1, y1, bitmap, pictureBox1, Color.Red);
+						MyGraphics.DrawLine(x0, y0, x1, y1, bitmap, pictureBox1, _mySelectedColor);
 						break;
 					case Tools.Circle:
 						int R = (int)Math.Sqrt(Math.Pow(x1 - x0, 2) + Math.Pow(y1 - y0, 2));
-						MyGraphics.DrawCircle(x0, y0, R, bitmap, pictureBox1, Color.Blue);
+						MyGraphics.DrawCircle(x0, y0, R, bitmap, pictureBox1, _mySelectedColor);
 						break;
-						case Tools.Ellipse:
-						MyGraphics.DrawEllipse(x0, y0, Math.Abs(x1 - x0), Math.Abs(y1 - y0), bitmap, pictureBox1, Color.Green);
+					case Tools.Ellipse:
+						MyGraphics.DrawEllipse(x0, y0, Math.Abs(x1 - x0), Math.Abs(y1 - y0), bitmap, pictureBox1, _mySelectedColor);
+						break;
+					case Tools.Spiral:
+						MyGraphics.DrawSpiral(x0, y0, Math.Abs(x1 - x0), 500, bitmap, pictureBox1, _mySelectedColor);
 						break;
 					default:
 						break;
@@ -95,13 +99,13 @@ namespace ProfZawadzki
 						break;
 					case Tools.Circle:
 						int R = (int)Math.Sqrt(Math.Pow(xCurrent - x0, 2) + Math.Pow(yCurrent - y0, 2));
-						MyGraphics.DrawCircle(x0, y0, R, tempBitmap, pictureBox1, Color.Blue);
+						MyGraphics.DrawCircle(x0, y0, R, tempBitmap, pictureBox1, Color.Red);
 						break;
 					case Tools.Ellipse:
-						MyGraphics.DrawEllipse(x0, y0, Math.Abs(xCurrent - x0), Math.Abs(yCurrent - y0), tempBitmap, pictureBox1, Color.Green);
+						MyGraphics.DrawEllipse(x0, y0, Math.Abs(xCurrent - x0), Math.Abs(yCurrent - y0), tempBitmap, pictureBox1, Color.Red);
 						break;
 					case Tools.Spiral:
-						// Spiral drawing code
+						MyGraphics.DrawSpiral(x0, y0, Math.Abs(xCurrent - x0), 500, tempBitmap, pictureBox1, Color.Red);
 						break;
 					default:
 						break;
@@ -115,6 +119,46 @@ namespace ProfZawadzki
 			tool = Tools.Ellipse;
 		}
 
+		private void BtnRed_Click(object sender, EventArgs e)
+		{
+			_mySelectedColor = Color.Red;
+		}
+
+		private void BtnGreen_Click(object sender, EventArgs e)
+		{
+			_mySelectedColor = Color.Green;
+
+		}
+
+		private void BtnBlue_Click(object sender, EventArgs e)
+		{
+			_mySelectedColor = Color.Blue;
+
+		}
+
+		private void BtnYellow_Click(object sender, EventArgs e)
+		{
+			_mySelectedColor = Color.Yellow;
+
+		}
+
+		private void BtnBlack_Click(object sender, EventArgs e)
+		{
+			_mySelectedColor = Color.Black;
+
+		}
+
+		private void BtnWhite_Click(object sender, EventArgs e)
+		{
+			_mySelectedColor = Color.White;
+
+		}
+
+		private void button2_Click(object sender, EventArgs e)
+		{
+			tool = Tools.Spiral;
+
+		}
 
 		public Form1()
 		{
@@ -125,12 +169,13 @@ namespace ProfZawadzki
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			tool = Tools.Line;
+			tool = Tools.None;
 		}
 
 		private void btnNone_Click(object sender, EventArgs e)
 		{
-			tool = Tools.None;
+			tool = Tools.Line;
+
 		}
 	}
 }
