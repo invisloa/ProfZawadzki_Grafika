@@ -18,13 +18,21 @@ namespace ProfZawadzki
 		private Bitmap tempBitmap;
 		bool mouseDown = false;
 		private Color _mySelectedColor = Color.Black;
+
+		// falling object
+		private Timer animationTimer;
+		private int fallingObjectX, fallingObjectY;
+		private readonly int fallingObjectSize = 50; // Size of the falling object
+		private readonly int fallingSpeed = 5; // Speed of the falling object
+
 		enum Tools
 		{
 			None,
 			Line,
 			Circle,
 			Ellipse,
-			Spiral
+			Spiral,
+			FallingObject
 		}
 		Tools tool = Tools.None;
 		private readonly int _R = 10;
@@ -37,6 +45,12 @@ namespace ProfZawadzki
 				x0 = e.X;
 				y0 = e.Y;
 				tempBitmap = (Bitmap)bitmap.Clone(); // Create a copy of the bitmap for the preview
+			}
+			if (tool == Tools.FallingObject)
+			{
+				fallingObjectX = e.X - fallingObjectSize / 2;
+				fallingObjectY = e.Y - fallingObjectSize / 2;
+				animationTimer.Start();
 			}
 		}
 
@@ -160,13 +174,39 @@ namespace ProfZawadzki
 
 		}
 
+		private void button3_Click(object sender, EventArgs e)
+		{
+
+			tool = Tools.FallingObject;
+		}
 		public Form1()
 		{
 
 			InitializeComponent();
 			bitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-		}
 
+
+			//falling object
+			animationTimer = new Timer();
+			animationTimer.Interval = 100; // Update every 100 milliseconds
+			animationTimer.Tick += new EventHandler(UpdateFallingObject);
+		}
+		private void UpdateFallingObject(object sender, EventArgs e)
+		{
+			if (fallingObjectY + fallingObjectSize < pictureBox1.Height)
+			{
+				fallingObjectY += fallingSpeed; // Move the object down
+			}
+			else
+			{
+				animationTimer.Stop(); // Stop the animation when the object reaches the bottom
+			}
+
+			bitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height); // Clear the canvas
+			MyGraphics.DrawCircle(fallingObjectX, fallingObjectY, fallingObjectSize, bitmap, pictureBox1, _mySelectedColor); // Draw the falling object
+			pictureBox1.Image = bitmap;
+			pictureBox1.Refresh();
+		}
 		private void button1_Click(object sender, EventArgs e)
 		{
 			tool = Tools.None;
