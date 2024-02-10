@@ -28,7 +28,6 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.button1 = new System.Windows.Forms.Button();
 			this.btnClear = new System.Windows.Forms.Button();
 			this.BtnRed = new System.Windows.Forms.Button();
 			this.BtnYellow = new System.Windows.Forms.Button();
@@ -39,11 +38,11 @@
 			this.btnEllipse = new System.Windows.Forms.Button();
 			this.btnCircle = new System.Windows.Forms.Button();
 			this.btnNone = new System.Windows.Forms.Button();
+			this.btnNone = new System.Windows.Forms.Button();
+			this.btnNone = new System.Windows.Forms.Button();
+			this.btnNone = new System.Windows.Forms.Button();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.button3 = new System.Windows.Forms.Button();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-			this.SuspendLayout();
-			// 
 			// button1
 			// 
 			this.button1.Location = new System.Drawing.Point(12, 12);
@@ -54,16 +53,16 @@
 			this.button1.UseVisualStyleBackColor = true;
 			this.button1.Click += new System.EventHandler(this.button1_Click);
 			// 
+			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.button1_Click);
+			// 
 			// btnClear
 			// 
-			this.btnClear.Location = new System.Drawing.Point(713, 27);
+			this.btnClear.Location = new System.Drawing.Point(173, 27);
 			this.btnClear.Name = "btnClear";
 			this.btnClear.Size = new System.Drawing.Size(75, 23);
 			this.btnClear.TabIndex = 4;
-			this.btnClear.Text = "Clear";
-			this.btnClear.UseVisualStyleBackColor = true;
-			this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
-			// 
+			this.btnClear.Text = "Stop";
 			// BtnRed
 			// 
 			this.BtnRed.BackColor = System.Drawing.Color.Red;
@@ -156,6 +155,9 @@
 			this.btnNone.UseVisualStyleBackColor = true;
 			this.btnNone.Click += new System.EventHandler(this.btnNone_Click);
 			// 
+			this.btnNone.UseVisualStyleBackColor = true;
+			this.btnNone.Click += new System.EventHandler(this.btnNone_Click);
+			// 
 			// pictureBox1
 			// 
 			this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -167,23 +169,20 @@
 			this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
 			this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
 			this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
-			// 
+			this.button3.Location = new System.Drawing.Point(226, 27);
 			// button3
 			// 
-			this.button3.Location = new System.Drawing.Point(226, 27);
-			this.button3.Name = "button3";
+			this.button3.Location = new System.Drawing.Point(357, -2);
+			this.button3.Text = "Animacja";
 			this.button3.Size = new System.Drawing.Size(75, 23);
 			this.button3.TabIndex = 13;
-			this.button3.Text = "Animacja";
+			this.button3.Text = "button3";
 			this.button3.UseVisualStyleBackColor = true;
 			this.button3.Click += new System.EventHandler(this.button3_Click);
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(800, 450);
-			this.Controls.Add(this.button3);
 			this.Controls.Add(this.BtnBlue);
 			this.Controls.Add(this.BtnWhite);
 			this.Controls.Add(this.BtnBlack);
@@ -191,10 +190,10 @@
 			this.Controls.Add(this.BtnYellow);
 			this.Controls.Add(this.BtnRed);
 			this.Controls.Add(this.btnEllipse);
+			this.Controls.Add(this.BtnYellow);
+			this.Controls.Add(this.BtnRed);
+			this.Controls.Add(this.btnEllipse);
 			this.Controls.Add(this.btnClear);
-			this.Controls.Add(this.btnCircle);
-			this.Controls.Add(this.btnNone);
-			this.Controls.Add(this.button1);
 			this.Controls.Add(this.pictureBox1);
 			this.Name = "Form1";
 			this.Text = "Form1";
@@ -204,12 +203,6 @@
 		}
 
 		#endregion
-
-		private System.Windows.Forms.PictureBox pictureBox1;
-		private System.Windows.Forms.Button button1;
-		private System.Windows.Forms.Button btnNone;
-		private System.Windows.Forms.Button btnCircle;
-		private System.Windows.Forms.Button btnClear;
 		private System.Windows.Forms.Button btnEllipse;
 		private System.Windows.Forms.Button BtnRed;
 		private System.Windows.Forms.Button BtnYellow;
@@ -217,6 +210,9 @@
 		private System.Windows.Forms.Button BtnBlack;
 		private System.Windows.Forms.Button BtnWhite;
 		private System.Windows.Forms.Button BtnBlue;
+		private System.Windows.Forms.Button BtnWhite;
+		private System.Windows.Forms.Button BtnBlue;
+		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button button3;
 	}
 }
