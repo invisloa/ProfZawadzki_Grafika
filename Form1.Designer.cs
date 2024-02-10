@@ -36,7 +36,6 @@
 			this.BtnBlack = new System.Windows.Forms.Button();
 			this.BtnWhite = new System.Windows.Forms.Button();
 			this.BtnBlue = new System.Windows.Forms.Button();
-			this.button2 = new System.Windows.Forms.Button();
 			this.btnEllipse = new System.Windows.Forms.Button();
 			this.btnCircle = new System.Windows.Forms.Button();
 			this.btnNone = new System.Windows.Forms.Button();
@@ -47,7 +46,7 @@
 			// 
 			// button1
 			// 
-			this.button1.Location = new System.Drawing.Point(12, 27);
+			this.button1.Location = new System.Drawing.Point(12, 12);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(75, 23);
 			this.button1.TabIndex = 1;
@@ -124,22 +123,11 @@
 			this.BtnBlue.UseVisualStyleBackColor = false;
 			this.BtnBlue.Click += new System.EventHandler(this.BtnBlue_Click);
 			// 
-			// button2
-			// 
-			this.button2.BackgroundImage = global::ProfZawadzki.Properties.Resources.spiral;
-			this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			this.button2.Location = new System.Drawing.Point(337, 27);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(75, 23);
-			this.button2.TabIndex = 12;
-			this.button2.UseVisualStyleBackColor = true;
-			this.button2.Click += new System.EventHandler(this.button2_Click);
-			// 
 			// btnEllipse
 			// 
 			this.btnEllipse.BackgroundImage = global::ProfZawadzki.Properties.Resources.ellipse;
 			this.btnEllipse.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			this.btnEllipse.Location = new System.Drawing.Point(256, 27);
+			this.btnEllipse.Location = new System.Drawing.Point(93, 37);
 			this.btnEllipse.Name = "btnEllipse";
 			this.btnEllipse.Size = new System.Drawing.Size(75, 23);
 			this.btnEllipse.TabIndex = 5;
@@ -150,7 +138,7 @@
 			// 
 			this.btnCircle.BackgroundImage = global::ProfZawadzki.Properties.Resources.circle_FILL0_wght400_GRAD0_opsz24;
 			this.btnCircle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			this.btnCircle.Location = new System.Drawing.Point(175, 27);
+			this.btnCircle.Location = new System.Drawing.Point(93, 12);
 			this.btnCircle.Name = "btnCircle";
 			this.btnCircle.Size = new System.Drawing.Size(75, 23);
 			this.btnCircle.TabIndex = 3;
@@ -161,7 +149,7 @@
 			// 
 			this.btnNone.BackgroundImage = global::ProfZawadzki.Properties.Resources.remove_FILL0_wght400_GRAD0_opsz24;
 			this.btnNone.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			this.btnNone.Location = new System.Drawing.Point(93, 27);
+			this.btnNone.Location = new System.Drawing.Point(12, 37);
 			this.btnNone.Name = "btnNone";
 			this.btnNone.Size = new System.Drawing.Size(75, 23);
 			this.btnNone.TabIndex = 2;
@@ -182,11 +170,11 @@
 			// 
 			// button3
 			// 
-			this.button3.Location = new System.Drawing.Point(357, -2);
+			this.button3.Location = new System.Drawing.Point(226, 27);
 			this.button3.Name = "button3";
 			this.button3.Size = new System.Drawing.Size(75, 23);
 			this.button3.TabIndex = 13;
-			this.button3.Text = "button3";
+			this.button3.Text = "Animacja";
 			this.button3.UseVisualStyleBackColor = true;
 			this.button3.Click += new System.EventHandler(this.button3_Click);
 			// 
@@ -196,7 +184,6 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
 			this.Controls.Add(this.button3);
-			this.Controls.Add(this.button2);
 			this.Controls.Add(this.BtnBlue);
 			this.Controls.Add(this.BtnWhite);
 			this.Controls.Add(this.BtnBlack);
@@ -230,7 +217,6 @@
 		private System.Windows.Forms.Button BtnBlack;
 		private System.Windows.Forms.Button BtnWhite;
 		private System.Windows.Forms.Button BtnBlue;
-		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button button3;
 	}
 }
